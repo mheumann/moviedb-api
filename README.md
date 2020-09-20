@@ -2,7 +2,8 @@
 Prequesits: PHP >= 7.3 and Composer installed
 1. Checkout Repo
 2. Run `composer install`
-3. Run `php -S localhost:8000 -t public`
+3. Rename .env.example to .env and set APP_KEY with a random 32 character string
+4. Run `php -S localhost:8000 -t public`
 
 ## License
 
