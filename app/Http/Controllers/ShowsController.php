@@ -35,6 +35,20 @@ class ShowsController extends Controller
             $currentPage++;
         }
         
-        return response(array_slice($responseBody, $startpoint, $amount))->header('Content-Type', 'application/json');
+        return response()->json(array_slice($responseBody, $startpoint, $amount));
+    }
+    
+    public function search($searchString) {
+        $client = new Client([
+            'base_uri' => 'http://api.tvmaze.com'
+        ]);
+
+        $extReq = $client->request('GET', 'search/shows?q=' . $searchString);
+
+        $res = array_filter(json_decode($extReq->getBody()->getContents()), function($show) use($searchString){
+            return preg_match('/' . strtolower($searchString) . '/', strtolower($show->show->name));
+        });
+
+        return response()->json($res);
     }
 }

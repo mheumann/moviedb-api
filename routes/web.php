@@ -13,4 +13,5 @@
 
 $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('shows', 'ShowsController@index');
+    $router->get('search/{searchString}', 'ShowsController@search');
 });
